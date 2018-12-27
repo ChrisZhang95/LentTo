@@ -1,0 +1,28 @@
+.bottom_footer_format_copyright{
+    border-top: solid;
+    text-align: center;
+}
+
+.bottom_footer_format_social_media{
+    text-align: right;
+    border-right: solid;
+    vertical-align: middle;
+    color: rgb(112, 112, 112);
+}
+
+.bottom_footer_format_left_border{
+    text-align: center;
+    border-right: solid;
+    color: rgb(112, 112, 112);
+}
+
+.bottom_footer_format_social_media_link{
+    text-align: left;
+}
+
+.bottom_footer_format_copyright, .bottom_footer_format_social_media, .bottom_footer_format_left_border{
+    
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+}
+

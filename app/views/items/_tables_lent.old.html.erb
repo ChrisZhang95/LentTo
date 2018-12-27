@@ -1,0 +1,214 @@
+<!-- Items you lent out -->
+<h1>Items you lent out</h1>
+
+<% if @lent_trans.size > 0 %>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Image</th>
+      <th>Lent to</th>
+      <th>Return date</th>
+      <th>Time left</th>
+    </tr>
+
+
+    <% @lent_trans.each do |transaction| %>
+        <% item = Item.find(transaction.item_id) %>
+        <% user = User.find(transaction.user_id) %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><% item.images.each do |image| %>
+            <%= image_tag(image, style:'width:100px') rescue nil%>
+          <% end %></td>
+          <td><%= user.email %></td>
+          <td><%= transaction.end_date %></td>
+          <td><%= transaction.end_date - DateTime.now %></td>
+        </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h4>none</h4>
+<% end %>
+
+<!-- People want to lend these items -->
+<h1>People want to lend these items</h1>
+<% if @lending_trans.size > 0 %>
+
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Image</th>
+      <th>Request from</th>
+      <th>Start date</th>
+      <th>Return date</th>
+    </tr>
+
+    <% @lending_trans.each do |transaction| %>
+      <% item = Item.find(transaction.item_id) %>
+      <% user = User.find(transaction.user_id) %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><% item.images.each do |image| %>
+          <%= image_tag(image, style:'width:100px') rescue nil%>
+        <% end %></td>
+        <td><%= user.email %></td>
+        <td><%= transaction.start_date %></td>
+        <td><%= transaction.end_date %></td>
+        <td><%= link_to 'Accept', request_accept_transaction_path(transaction), method: :put, data: { confirm: 'Are you sure you want to accept this request? Once accepted, it is no longer revertable.'  } %></td>
+        <td><%= link_to 'Reject', request_reject_transaction_path(transaction), method: :put, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h4>none</h4>
+<% end %>
+<!-- Requests you accepted -->
+<h1>Requests you accepted</h1>
+
+<% if @accepted_trans.size > 0 %>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Image</th>
+      <th>Request from</th>
+      <th>Start date</th>
+      <th>Return date</th>
+    </tr>
+
+    <% @accepted_trans.each do |transaction| %>
+      <% item = Item.find(transaction.item_id) %>
+      <% user = User.find(transaction.user_id) %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><% item.images.each do |image| %>
+          <%= image_tag(image, style:'width:100px') rescue nil%>
+        <% end %></td>
+        <td><%= user.email %></td>
+        <td><%= transaction.start_date %></td>
+        <td><%= transaction.end_date %></td>
+      </tr>
+    <% end %>
+
+  </table>
+<% else %>
+  <h4>none</h4>
+<% end %>
+
+<!-- Recent requests you rejected -->
+<h1>Recent requests you rejected</h1>
+
+<% if @rejected_trans.size > 0 %>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Image</th>
+      <th>Request from</th>
+      <th>Start date</th>
+      <th>Return date</th>
+    </tr>
+
+    <% @rejected_trans.each do |transaction| %>
+      <% item = Item.find(transaction.item_id) %>
+      <% user = User.find(transaction.user_id) %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><% item.images.each do |image| %>
+          <%= image_tag(image, style:'width:100px') rescue nil%>
+        <% end %></td>
+        <td><%= user.email %></td>
+        <td><%= transaction.start_date %></td>
+        <td><%= transaction.end_date %></td>
+      </tr>
+    <% end %>
+
+  </table>
+<% else %>
+  <h4>none</h4>
+<% end %>
+<!-- <h1>Items you lent out</h1>
+<h1><%=@debug %></h1>
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Image</th>
+    <th>Lent to</th>
+    <th>Return date</th>
+    <th>Time left</th>
+  </tr>
+
+
+  <% @items.each do |item| %>
+    <% transactions = Transaction.where(:item_id => item.id, :status => "in progress") %>
+    <% transactions.each do |transaction| %>
+      <% item = Item.find(transaction.item_id) %>
+      <% user = User.find(transaction.user_id) %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><% item.images.each do |image| %>
+          <%= image_tag(image, style:'width:100px') rescue nil%>
+        <% end %></td>
+        <td><%= user.email %></td>
+        <td><%= transaction.end_date %></td>
+        <td><%= transaction.end_date - DateTime.now %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<h1>People want to lend these items</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Image</th>
+    <th>Request from</th>
+    <th>Start date</th>
+  </tr>
+
+  <% @items.each do |item| %>
+    <% transactions = Transaction.where(:item_id => item.id, :status => "pending") %>
+    <% transactions.each do |transaction| %>
+    <% item = Item.find(transaction.item_id) %>
+    <% user = User.find(transaction.user_id) %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><% item.images.each do |image| %>
+        <%= image_tag(image, style:'width:100px') rescue nil%>
+      <% end %></td>
+      <td><%= user.email %></td>
+      <td><%= transaction.start_date %></td>
+      <td><%= link_to 'Accept', request_accept_transaction_path(transaction), method: :put, data: { confirm: 'Are you sure you want to accept this request? Once accepted, it is no longer revertable.'  } %></td>
+      <td><%= link_to 'Reject', request_reject_transaction_path(transaction), method: :put, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  <% end %>
+
+</table>
+
+<h1>Requests you accepted</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Image</th>
+    <th>Request from</th>
+    <th>Start date</th>
+  </tr>
+
+  <% @items.each do |item| %>
+    <% transactions = Transaction.where(:item_id => item.id, :status => "accepted") %>
+    <% transactions.each do |transaction| %>
+    <% item = Item.find(transaction.item_id) %>
+    <% user = User.find(transaction.user_id) %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><% item.images.each do |image| %>
+        <%= image_tag(image, style:'width:100px') rescue nil%>
+      <% end %></td>
+      <td><%= user.email %></td>
+      <td><%= transaction.start_date %></td>
+    </tr>
+    <% end %>
+  <% end %>
+
+</table> -->

@@ -1,0 +1,40 @@
+<h5 class="card-title text-center">Register</h5>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'form-signin') do |f| %>
+  <% unless devise_error_messages!.empty? %>
+  <div class="alert alert-danger" role="alert">
+    <%= devise_error_messages! %>
+  </div>
+  <% end %>
+
+  <div class="form-label-group">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg', placeholder: 'email' %>
+    <%= f.label :email %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control form-control-lg', placeholder: 'password' %>
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <small class="form-text text-center text-muted"><%= @minimum_password_length %> characters minimum</small>
+    <% end %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg', placeholder: 'password' %>
+    <%= f.label :password_confirmation %>
+  </div>
+
+  <button class="btn btn-primary btn-block text-uppercase" type="submit">Register</button>
+  <%= link_to 'Log In', new_user_session_path, class: "d-block text-center mt-2 small" %>
+  <!--confirmation instructions not received -->
+  <hr class="my-4">
+  <a class="btn  btn-google btn-block text-uppercase" href="<%= user_google_oauth2_omniauth_authorize_path %>">
+    <i class="fab fa-google mr-2"></i> 
+    Sign up with Google
+  </a>
+  <a class="btn  btn-facebook btn-block text-uppercase" href="<%= user_facebook_omniauth_authorize_path %>">
+    <i class="fab fa-facebook-f mr-2"></i> 
+    Sign up with Facebook
+  </a>
+<% end %>

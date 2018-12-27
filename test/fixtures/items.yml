@@ -1,0 +1,174 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+projector:
+  id: 1
+  name: Projector
+  category: audiov
+  user: ben
+  description: >
+              A projector or image projector is an optical 
+              device that projects an image (or moving images) 
+              onto a surface, commonly a projection screen. 
+              Most projectors create an image by shining a 
+              light through a small transparent lens, but some 
+              newer types of projectors can project the image 
+              directly, by using lasers. A virtual retinal 
+              display, or retinal projector, is a projector 
+              that projects an image directly on the retina 
+              instead of using an external projection screen
+  public: true
+
+mic:
+  id: 2
+  name: Microphone
+  category: audiov
+  user: stacy
+  description: >
+              Microphones are used in many applications such 
+              as telephones, hearing aids, public address 
+              systems for concert halls and public events, 
+              motion picture production, live and recorded 
+              audio engineering, sound recording, two-way 
+              radios, megaphones, radio and television 
+              broadcasting, and in computers for recording 
+              voice, speech recognition, VoIP, and for 
+              non-acoustic purposes such as ultrasonic sensors 
+              or knock sensors.
+  public: true
+
+speaker:
+  id: 3
+  name: Weather Resistant Speakers
+  category: audiov
+  user: eve
+  description: >
+              Heading to the beach, or the pool, or the 
+              shower? If you want to take your music with you, 
+              you totally can with a waterproof speaker - as 
+              long as it's got an IP67 rating that is.
+              
+              We're still waiting for flying cars and 
+              near-sentient robot house cleaners, but 
+              waterproof and wireless Bluetooth speakers are 
+              one device that technology has already delivered 
+              on.
+  public: true
+
+bmxbike:
+  id: 4
+  name: BMX Bike
+  category: bikes
+  user: ben
+  description: >
+              You’ll make the most of your bicycling experience if you 
+              choose the right kind of equipment. 
+  public: true
+
+mbike:
+  id: 5
+  name: Mountain Bike
+  category: bikes
+  user: eve
+  description: The mountain experience
+  public: true
+
+camera:
+  id: 6
+  name: Canon EOS
+  category: cameras
+  user: ben
+  description: Picturesque!
+  public: false
+
+bgame:
+  id: 7
+  name: Assorted Board Games
+  category: games
+  user: ben
+  description: |
+              Monopoly
+              Chess
+              Jenga
+              Jumanji
+
+  public: true
+
+fortnite:
+  id: 8
+  name: Fortnite 2017
+  category: games
+  user: ben
+  description: XBox One
+  public: true
+
+minecraft:
+  id: 9
+  name: Minecraft 2009
+  category: games
+  user: ben
+  description: XBox
+  public: true
+
+battlefield:
+  id: 10
+  name: Battlefield 1
+  category: games
+  user: ben
+  description: PS4
+  public: true
+
+fifa:
+  id: 11
+  name: FIFA 19
+  category: games
+  user: ben
+  description: EA Sports
+  public: true
+
+volley:
+  id: 12
+  name: Volleyball Equipment
+  category: sports
+  user: ben
+  description: Comes with the ball and the net
+  public: true
+
+soccer:
+  id: 13
+  name: Soccer Ball
+  category: sports
+  user: eve
+  description: PS4
+  public: true
+
+mower:
+  id: 14
+  name: Lawn Mower
+  category: tools
+  user: ben
+  description: grass
+  public: true
+
+shovel:
+  id: 15
+  name: Snow Shovel
+  category: tools
+  user: ben
+  description: snow
+  public: false
+
+blower:
+  id: 16
+  name: Snow Blower
+  category: tools
+  user: ben
+  description: snow
+  public: true
+
+cart:
+  id: 17
+  name: Shopping Cart
+  category: tools
+  user: ben
+  description: Shop in bulk
+  public: false

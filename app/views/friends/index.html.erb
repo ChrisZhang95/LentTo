@@ -1,0 +1,35 @@
+<ul class="list-group mt-4">
+  <li class="list-group-item active">
+    <div class="media">
+      <div class="media-left">
+        <h3>My Friends</h3>
+      </div>
+      <div class="media-body">
+        <br>
+      </div>
+      <div class="media-right">
+        <%= link_to 'Add new friends', new_friend_path, class: "btn btn-success" %>
+      </div>
+    </div>
+  </li>
+  <% current_user.friends.each do |friend| %>
+       <li class="list-group-item">
+      <div class="media">
+              <div class="media-left" style="padding-right:20px;">
+                  <div style="width:100px; height:100px;">
+                    <%= raw(get_picture(friend.target, "media-object rounded w-100"))%>
+                  </div>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><%= friend.first_name %> <%= friend.last_name %></h4>
+              </div>
+              <div class="media-right">
+                <%= link_to 'Show Details', friend_path(friend), class: "btn btn-primary" %>
+                <%= link_to 'Unfriend', friend_path(friend), class: "btn btn-danger",
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+              </div>
+            </div>
+    </li>
+  <% end %>
+</ul>

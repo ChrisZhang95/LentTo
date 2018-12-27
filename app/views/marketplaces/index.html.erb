@@ -1,0 +1,197 @@
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <div class="card w-100 rounded-0 border-0 shadow">
+            <div class="card-header bg-purple text-white ">
+                <h1 class="display-4 text-gold">Marketplace</h1>
+            </div>
+            <div class="card-body">
+                <%= form_tag marketplaces_path, method: :get do %>
+                    <div class="input-group">
+                        <%= select_tag :category_id, options_for_select(@select_items),
+                                    class: "custom-select custom-select-lg col-sm-3 rounded-0" %>
+                        <%= text_field_tag :search,
+                                    params[:search],placeholder: "Search",
+                                    class: "form-control form-control-lg col-sm-9 rounded-0" %>
+                        <% if @user %>
+                          <%= hidden_field_tag :current_user_id, current_user.id  %>
+                        <% end %>
+
+                    </div>
+                    <%= content_tag :div, class: "temp_information", data: {temp: @friend} do %>
+                    <% end %>
+                    <div class="form-group text-center mt-3 mb-0">
+                        <div class="form-check form-check-inline mb-2 mr-2">
+                            <%= radio_button_tag :friends, false , id: "friends_false"%>
+                            <%= label_tag :friends_select, "All Items",class:"form-check-label" %>
+                        </div>
+                        <div class="form-check form-check-inline mb-2 mr-2">
+                            <%= radio_button_tag :friends, true , id: "friends_true"%>
+                            <%= label_tag :friends_select, "Your Circle Only",class:"form-check-label" %>
+                        </div>
+                        <button class="btn btn-primary" type="submit>">
+                            <i class="fas fa-search"></i> Filter
+                        </button>
+                        <% if params[:search] != nil && params[:search].length > 0 %>
+                            <a href="<%= marketplaces_path %>" class="btn btn-success ml-2">
+                                <i class="fas fa-redo"></i> Reset
+                            </a>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+            <div class="card-footer text-center bg-light">
+                <ul class="nav nav-pills justify-content-end" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="gridview-tab" data-toggle="pill" href="#gridview" role="tab" aria-controls="gridview" aria-selected="true">
+                            <i class="fas fa-th"></i>
+                            Grid
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="mapview-tab" data-toggle="pill" href="#mapview" role="tab" aria-controls="mapview" aria-selected="false">
+                            <i class="fas fa-map-marked-alt"></i>
+                            Map
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade  show active" id="gridview" role="tabpanel" aria-labelledby="gridview-tab">
+        <div class="row mt-4">
+            <div class="col-sm-12 ">
+                <div class="apple_pagination text-center">
+                    <%= will_paginate @displayItems %>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <% @displayItems.each do |item|%>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card shadow-sm text-center">
+                        <div class="card-img-top product-img" alt="Card image cap"
+                                style="background-image:url(<%=  url_for(item.images.first) %>);">
+                        </div>
+                        <div class="card-body bg-light">
+                            <h5 class="card-title"><%= item.name %></h5>
+                            <small class="w-100 text-muted"><%= item.category.name %></small>
+                            <h5>
+                                <% item.stars.times do%>
+                                    <span class="fas fa-star" style="color:#FFBC15"></span>
+                                <% end %>
+                                <% item.blank_stars.times do%>
+                                    <span class="far fa-star" style="color:#FFBC15"></span>
+                                <% end %>
+                                <div class="w-100 mt-3">
+                                    <a href="<%= marketplace_path item %>" class="btn btn-info">
+                                        <i class="fas fa-arrow-circle-down"></i> Details
+                                    </a>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            <%end%>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="mapview" role="tabpanel" aria-labelledby="mapview-tab">
+        <div class="row px-2 mt-4">
+            <input id="location" type="hidden" value="">
+            <div id="map" class="w-100" style="height:100vh;"></div>
+            <script>
+                var railsObj = <%= @mapItems %>;
+                var img_dict = <%= @img_list %>;
+                var friend = $('.temp_information').data('temp');
+                //alert(all);
+                if(friend == false || typeof(friend) === 'undefined'){
+                  // alert("true/nil");
+                  $('#friends_false').prop("checked", true);
+                  $('#friends_true').prop("checked", false);
+                }
+                else{
+                  // alert(all);
+                  $('#friends_true').prop("checked", true);
+                  $('#friends_false').prop("checked", false);
+
+                }
+                // Initialize and add the map
+                function initMap() {
+                    var default_location = {lat: 43.653908, lng: -79.384293};
+                    if(document.getElementById('location').value){
+                        default_location = JSON.parse(document.getElementById('location').value);
+                    }
+                    var map = new google.maps.Map(
+                        document.getElementById('map'), {zoom: 8, center: default_location});
+                    if(document.getElementById('location').value){
+                        var marker = new google.maps.Marker({position: default_location, map: map});
+                    }
+                    var infowindow = new google.maps.InfoWindow();
+
+                    var marker;
+                    var locationDict = {};
+                    for(let i of railsObj){
+                        if(img_dict[i.id] && img_dict[i.id] != "http://localhost:3000/marketplaces"){
+                            i["img"] = img_dict[i.id];
+                        }
+                        else{
+                            i["img"] = "https://image.flaticon.com/icons/svg/258/258500.svg"
+                        }
+                        if(locationDict[i.location] == null){
+                            locationDict[i.location] = [];
+                            locationDict[i.location].push(i);
+                        }
+                        else{
+                            locationDict[i.location].push(i);
+                        }
+                    }
+
+                    for(let key in locationDict){
+                        marker = new google.maps.Marker({position: JSON.parse(key), map: map});
+                        let contentString = "";
+                        for (let obj of locationDict[key]){
+                            /*let content = '<div id="content">'+
+                            '<div id="siteNotice">'+
+                            '</div>'+
+                            '<h3 id="firstHeading" class="firstHeading">'+ obj.name+'</h3>'+
+                            '<div id="bodyContent">'+
+                            '<img src="' + obj.img + '" width="42" height="42">' +
+                            '<p>'+ obj.description+'</p>'+
+                            '<p>Check out this item! <a href="/marketplaces/' + obj.id + '">'+
+                            'More Info</a> '+
+                            '</p>'+
+                            '</div>'+
+                            '</div>';*/
+                            let content =
+                            '<div class="card" style="width: 100%;">' +
+                            '<div class="card-body">'+
+                                '<h5 class="card-title">'+ obj.name +'</h5>' +
+                                '<img src="' + obj.img + '" class="img-fluid" width="50" height="50">' +
+                                '<p class="card-text">'+ obj.description +'</p>' +
+                                '<a href="/marketplaces/'+ obj.id +'" class="card-link">Item link</a>' +
+                            '</div>' +
+                            '</div>'+
+                            '<br>';
+                            contentString += content;
+                        }
+
+                        google.maps.event.addListener(marker, 'click', (function(marker) {
+                            return function() {
+                                infowindow.setContent(contentString);
+                                infowindow.open(map, marker);
+                                infowindow.setOptions({maxWidth: 200});
+                            }
+                        })(marker));
+
+                    }
+
+                    console.log(locationDict);
+                }
+            </script>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBO6_x2QkUcC7K6E7cFiFhEv0eBdOWgWg&callback=initMap">
+            </script>
+        </div>
+    </div>
+</div>

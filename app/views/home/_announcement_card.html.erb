@@ -1,0 +1,30 @@
+<a href="<%= announcement_path(announcement_data)%>" class="clickable_card">
+    <div class="card text-center">
+        <div class="card-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 text_formatting">
+                        <%= announcement_data.title %>
+                    </div>
+                    <div class="col-sm text-mute notice_date">
+                        <%= announcement_data.updated_at.strftime("%F") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div>
+                <%= image_tag(announcement_data.image, class: "img-fluid", width:"500px", "max-height":"200px") rescue nil%>
+            </div>
+            <div style="padding-top:30px; text-align:left">
+                <h5><b><%= announcement_data.caption %></b></h5>
+            </div>
+            <div style="padding-top:20px; text-align:left; white-space: pre-wrap;" >
+                <%= announcement_data.description.truncate_words(40)%>
+            </div>
+        </div>
+        <!--div class="card-footer text-muted text_formatting">
+            <%= announcement_data.caption %>
+        </div-->
+    </div>
+</a>

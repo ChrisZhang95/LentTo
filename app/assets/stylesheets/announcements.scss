@@ -1,0 +1,36 @@
+// Place all the styles related to the announcements controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.borderless td, .borderless th , .borderless tr, .borderless  {
+    border-top: none;
+    border-bottom: none;
+}
+
+.save-whitespace{
+    white-space: pre-wrap;
+}
+
+.black-bottom{
+    padding: 3px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.link-formatting{
+    color: white;
+}
+
+.img-formatting{
+    object-fit: cover;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.img-fluid{
+    object-fit: cover;
+    height: 200px;
+    margin: 0 auto;
+}
+

@@ -1,0 +1,124 @@
+// Place all the styles related to the Landings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#main_container.container{
+    padding: 0px 0px 0px 0px ;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+//************ LANDING BACKGROUND CSS ***************************//
+.button_large{
+    padding-left: 100px;
+    padding-right: 100px;
+    font-weight: bold;
+   // padding-top: 30px;
+   // padding-bottom: 30px;
+}
+
+
+.landing_background{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    // bg has to be transparent for parallax to work
+    background: transparent;
+
+    height: 100vh;
+    width: 100vw;
+
+    text-align: center;
+}
+
+.parallax-window {
+    //min-height: 400px;
+    background: transparent;
+    height: 100vh;
+    width: 100vw;
+}
+
+.display-1.title{
+      
+    color: #FFFFFF;
+}
+
+.h2.title{
+  
+    font-weight: lighter;
+    color: #FFFFFF;
+}
+
+//************ INFO BLOCK CSS ***************************//
+
+.h1.info_title{
+  
+    font-weight: lighter;
+    color: #000000;
+}
+
+.h4.info_description{
+
+    font-weight: lighter;
+    color: #222222;
+    text-align: justify;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.info_block_1{
+    text-align: justify;
+    height: 70vh;
+    width: 100vw;
+}
+
+.info_block_2{
+    text-align: justify;
+    height: 70vh;
+    width: 100vw;
+    background-color: #ecebeb;
+}
+
+.col-sm.info_block_1_image{
+
+    background-image: url("TableLaptop960x.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    //background-attachment: fixed;
+    height: 70vh;
+    width: 100vw;
+}
+
+.col-sm-8.info_block_2_image{
+
+    background-image: url("PlaceholderResize.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    //background-attachment: fixed;
+    height: 70vh;
+    width: 100vw;
+}
+
+.col-sm.info_block_text{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    height: 70vh;
+    width: 100vw;
+}

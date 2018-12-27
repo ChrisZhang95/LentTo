@@ -1,0 +1,35 @@
+<ul class="list-group mt-4">
+  <li class="list-group-item list-group-item-secondary">
+    <h2>
+      <strong><%=@friend_obj.profile.first_name %>  <%=@friend_obj.profile.last_name %></strong>
+    </h2>
+
+    <h4>
+    Average rating for this friend:
+    <strong><%= @average %></strong>
+    </h4>
+  </li>
+<% @friend_obj.items.each do |item| %>
+    <li class="list-group-item">
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag((item.images[0]||"http://cdn.osxdaily.com/wp-content/uploads/2016/03/package-file-check.jpg"), class:"rounded", style:'width:150px') rescue nil%>
+          <br>
+          <strong><%= item.name %></strong>
+        </div>
+        <div class="media-body" style="padding-left:10px">
+          Item Description:
+          <br>
+          <%= item.description %>
+        </div>
+        <div class="media-right">
+          <a href="/marketplaces/<%= item.id%>" class="btn btn-success">Go to Item</a>
+        </div>
+      </div>
+    </li>
+<% end %>
+</ul>
+
+
+ <%= link_to 'Back', friends_path, class: "btn btn-warning" %>
+

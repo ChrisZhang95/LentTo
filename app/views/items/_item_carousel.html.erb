@@ -1,0 +1,39 @@
+<!--Carousel Wrapper-->
+<div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails py-2" data-ride="carousel">
+    <!--Slides-->
+    <div class="carousel-inner " role="listbox">
+        <% @item.images.each_with_index do |image, index| %>
+        <% if index == 0 %>
+            <div class="carousel-item text-center  active">
+        <% else %>
+            <div class="carousel-item text-center">
+        <% end %>
+                <%= image_tag(image, class: "img-fluid img-thumbnail", style: "height: 300px;") rescue nil%>
+            </div>
+        <% end %>
+    </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon bg-secondary rounded p-1" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bg-secondary rounded p-1" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+    <ol class="carousel-indicators pb-2">
+        <% @item.images.each_with_index do |image, index| %>        
+        <% if index == 0 %>
+            <li data-target="#carousel-thumb" data-slide-to="<%= index %>" class="active"> 
+        <% else %>
+            <li data-target="#carousel-thumb" data-slide-to="<%= index %>"> 
+        <% end %>
+                <%= image_tag(image, class: "d-block w-100 img-fluid img-thumbnail") rescue nil%>
+            </li>
+        <% end %>
+    </ol>
+</div>
+<!--/.Carousel Wrapper-->
+                        

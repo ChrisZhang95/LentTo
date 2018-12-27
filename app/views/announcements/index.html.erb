@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%= stylesheet_link_tag "home" %>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    </head>
+    
+    <script>
+
+    </script>
+
+    <body>
+    
+    <%= render 'home/newsfeed_carousel' %>
+  
+    <section class="container white shadow p-3 mb-5 bg-white rounded" id="main_body"></div>
+      <% if user_signed_in? && current_user.admin? %> <!--- NEED TO ADD ADMIN CHECK HERE --->
+          <div class="p-5">  
+            <%= link_to "Create New Announcement", new_announcement_path, class: "btn btn-primary btn-lg btn-block" %>
+          </div>
+      <%end%>
+
+
+        <!--div class="d-flex"-->
+            <!-------------------- Tabs -------------------->
+            <ul class="nav nav-tabs" id="news_tab" role="tablist">
+                <li class="nav-item tab_formatting">
+                    <a class="nav-link active tab_font" id="latest_tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="true">
+                        Latest<br>
+                        <i class="fas fa-angle-double-up fa-lg center_icon"></i>
+                    </a>
+                </li>
+                <li class="nav-item tab_formatting">
+                    <a class="nav-link tab_font" id="important_tab" data-toggle="tab" href="#important" role="tab" aria-controls="important" aria-selected="false">
+                        Important<br>
+                        <!--i class="fas fa-exclamation-circle fa-lg center_icon" style="color: #e52222;"></i-->
+                        <i class="fas fa-exclamation-circle fa-lg center_icon" ></i>
+                    </a>
+                </li>
+                <li class="nav-item tab_formatting">
+                    <a class="nav-link tab_font" id="notices_tab" data-toggle="tab" href="#notices" role="tab" aria-controls="notice" aria-selected="false">
+                        Notices<br>
+                        <i class="far fa-star fa-lg center_icon" ></i>
+                    </a>
+                </li>
+                <li class="nav-item tab_formatting">
+                    <a class="nav-link tab_font" id="maintenance_tab" data-toggle="tab" href="#maintenance" role="tab" aria-controls="maintenance" aria-selected="false">
+                        Maintenance<br>
+                        <i class="fas fa-wrench fa-lg center_icon"></i>
+                    </a>
+                </li>
+                <li class="nav-item tab_formatting">
+                    <a class="nav-link tab_font " id="status_tab" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+                        Status<br>
+                        <i class="fas fa-times-circle fa-lg center_icon"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <!--------------------Latest Tabs -------------------->
+            <div class="tab-content" id="news_tab_content">
+                <div class="tab-pane fade show active" id="latest" role="tabpanel" aria-labelledby="latest_tab">
+                    <% announcement_data = @announcement%>
+                    <%= render 'home/announcement_table', :announcement_data => announcement_data %>                  
+                </div>
+                <!-------------------- Important Tabs -------------------->
+                <div class="tab-pane fade" id="important" role="tabpanel" aria-labelledby="important_tab">Important     
+                    <% announcement_data = @announcement_important%>
+                    <%= render 'home/announcement_table', :announcement_data => announcement_data %>                  
+                </div>
+                <!-------------------- Notices Tabs -------------------->
+                <div class="tab-pane fade" id="notices" role="tabpanel" aria-labelledby="notice_tab">notices
+                    <% announcement_data = @announcement_notice%>
+                    <%= render 'home/announcement_table', :announcement_data => announcement_data %>                  
+                </div>
+                <!-------------------- Maintenance Tabs -------------------->
+                <div class="tab-pane fade" id="maintenance" role="tabpanel" aria-labelledby="maintenance_tab">Maintenance
+                    <% announcement_data = @announcement_maintenance%>
+                    <%= render 'home/announcement_table', :announcement_data => announcement_data %>                  
+                </div>
+                <!-------------------- Status Tabs -------------------->
+                <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status_tab">Status
+                    <% announcement_data = @announcement_status%>
+                    <%= render 'home/announcement_table', :announcement_data => announcement_data %>                  
+                </div>
+            
+            </div>
+
+
+    </section>  
+
+
+</html>

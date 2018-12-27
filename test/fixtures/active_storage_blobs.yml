@@ -1,0 +1,191 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bmxbike_1:
+  id: 1
+  key: n9a2kAgtHQWhBfnMPT3xuCGU
+  filename: bmxbike_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 161051
+  checksum: Z1iDPuSgcvt8jHs/sdq/yA==
+  created_at: <%= Time.zone.now %>
+
+projector_2:
+  id: 2
+  key: HnPYKEinUwwgx9c1AE5ycKbw
+  filename: projector_2.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 82029
+  checksum: GvrXL2XjKkVu72m2ZPIIbw==
+  created_at: <%= Time.zone.now %>
+
+projector_1:
+  id: 3
+  key: 7F8rbDPW7h6uJMXFAuivnFtU
+  filename: projector_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 110025
+  checksum: CaKKVSllTCh8HF+oAZHxVw==
+  created_at: <%= Time.zone.now %>
+
+bgames_1:
+  id: 4
+  key: eQt4dWCKSPBwB1SsQY8YhmJH
+  filename: bgames_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 330074
+  checksum: WkZU2Jr6ui78hCg4Z1L0BA==
+  created_at: <%= Time.zone.now %>
+
+bgames_2:
+  id: 5
+  key: gcp8ijHjUsDn5zrRUvy1SMRz
+  filename: bgames_2.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 225452
+  checksum: AhgSm+ufTt31/44sbf+PtQ==
+  created_at: <%= Time.zone.now %>
+
+bgames_3:
+  id: 6
+  key: YM12KD1vC85MnazFYw2fdGKN
+  filename: bgames_3.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 214240
+  checksum: +C8T/GfYuTxssy/Kh/vKVQ==
+  created_at: <%= Time.zone.now %>
+
+fortnite_1:
+  id: 7
+  key: yd88SEk6Wz7mMbYffFeEovN9
+  filename: fortnite_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 32361
+  checksum: T9D6OnR3vpgS9BMQeScvNA==
+  created_at: <%= Time.zone.now %>
+
+fifa_1:
+  id: 8
+  key: YQmk4oXu9XoQtbrSLCHNvWVy
+  filename: fifa_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 221280
+  checksum: MlK5wSzCMaQ9zcuUoR60nw==
+  created_at: <%= Time.zone.now %>
+
+mower_1:
+  id: 9
+  key: SVvhUftHnSQDjXTSfxECQtUu
+  filename: mower_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 34976
+  checksum: CbokHv6hByKrXJfkwkaDsg==
+  created_at: <%= Time.zone.now %>
+
+minecraft_1:
+  id: 10
+  key: nRZDZuHRgTQ7EMAo6i1ez6aG
+  filename: minecraft_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 34418
+  checksum: Yr3MGuweC+Vt24ZfV7kyAw==
+  created_at: <%= Time.zone.now %>
+
+volley_1:
+  id: 11
+  key: jJDYcGvsTTMM55FPzCw83eEB
+  filename: volley_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 12477
+  checksum: tdUbZp2dERBDvEBfXQgyBg==
+  created_at: <%= Time.zone.now %>
+
+volley_2:
+  id: 12
+  key: hcgwNgKr7Zms8XX8cSzvvWCS
+  filename: volley_2.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 5004
+  checksum: KtKun768BhuTjHuahu/SYA==
+  created_at: <%= Time.zone.now %>
+
+blower_1:
+  id: 13
+  key: QHrbcP5uBcbSPeYSCtV5VuTb
+  filename: blower_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 110552
+  checksum: i1RtDGw/gDOV8f++5DEJkA==
+  created_at: <%= Time.zone.now %>
+
+camera_1:
+  id: 14
+  key: c9KYAsMKVpVtzFaJPdwamGdR
+  filename: camera_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 7762
+  checksum: p38qzzNZG98JXldeskQ0Yg==
+  created_at: <%= Time.zone.now %>
+
+camera_2:
+  id: 15
+  key: 2E77cv1kKhsufkBnze3niVU6
+  filename: camera_2.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 8656
+  checksum: kj4WP8TGy6GQoMfuw08TtA==
+  created_at: <%= Time.zone.now %>
+
+soccer_1:
+  id: 16
+  key: ASUZGXA1EmVRaFNsCugStkhC
+  filename: soccer_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 90721
+  checksum: ONRYTbiZyWw9WJ3bebQ3vQ==
+  created_at: <%= Time.zone.now %>
+
+speaker_1: 
+  id: 17
+  key: mA7MBxx9hhpjWZoFeG3YSzqu
+  filename: speaker_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 47988
+  checksum: lvY/xfrw5fom49LL8lSPCA==
+  created_at: <%= Time.zone.now %>
+
+mic_1:
+  id: 18
+  key: aXMb96ahwSWv2LsYFcN7EdSd
+  filename: mic_1.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 48883
+  checksum: qBmEtARV1QzRCLMWpje2bA==
+  created_at: <%= Time.zone.now %>
+
+mic_2:
+  id: 19
+  key: Q75G3CJJFZ8op1gWQgTudCQS
+  filename: mic_2.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 106544
+  checksum: j5IJzZ9iEo2N+eZPR3MuCQ==
+  created_at: <%= Time.zone.now %>

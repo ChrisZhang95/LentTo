@@ -1,0 +1,5 @@
+<%= image_tag(announcement_data.image, class: "d-block w-100 img") rescue image_tag("Announcment_Image1.jpg", class: "d-block w-100 img")%>
+<div class = "carousel-caption gray_backing_caption">
+    <h1><%= announcement_data.title rescue nil %></h1>
+    <h5><%= announcement_data.caption rescue nil%></h1>
+</div>

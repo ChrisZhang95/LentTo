@@ -1,0 +1,142 @@
+<%# This sets the title for this page %>
+<% content_for :title, "Item Details" %>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="p-0">
+            <!-- Item Name and Category -->
+            <div class="d-block p-2 mx-0 mb-3">
+                <a href="<%= url_for(:back) %>" class="btn btn-secondary my-3 border-right">
+                    <i class="fas fa-arrow-circle-left"></i> Go Back
+                </a> &nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+
+<%# START main page content %>
+<div class="row">
+    <!-- content -->
+    <div class="col-md-8">
+        <div class="p-0">
+            <!-- Item Name and Category -->
+            <div class="d-block p-2 mx-0 mb-3 bg-white shadow">
+                <h3 class="display-5">
+                    <%= @item.name %> |
+                    <small class="text-muted">
+                        <%= @item.category.name %>
+                        <a href="#" class="btn btn-outline-secondary">
+                        <img src="/assets/icons/browser.png" width="25px" %>
+                        <%= is_public_text(@item.public) %>
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <!-- Carousel -->
+            <% if @item.images.first != nil %>
+                <div class="d-block p-0">
+                <%= render "items/item_carousel" %>
+                </div>
+            <% end %>
+            <!-- Description -->
+            <br><br>
+            <div class="d-block p-3 mx-0 bg-purple text-white">
+                <p>
+                <%= @item.description %>
+                </p>
+            </div>
+            <div class="d-block p-0">
+                <%= render "items/market_owner_profile" %>
+            </div>
+            <!-- Google Map -->
+            <input id="location" type="hidden" value="<%=@item.location%>">
+            <div id="map" style="height:300px; width:100%"></div>
+            <script>
+                // Initialize and add the map
+                function initMap() {
+                    var default_location = {lat: 43.653908, lng: -79.384293};
+                    if(document.getElementById('location').value){
+                        default_location = JSON.parse(document.getElementById('location').value);
+                    }              var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 12, center: default_location});
+
+                if(document.getElementById('location').value){
+                    var marker = new google.maps.Marker({position: default_location, map: map});
+                }
+                }
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBO6_x2QkUcC7K6E7cFiFhEv0eBdOWgWg&callback=initMap">
+            </script>
+            <!-- Ratings -->
+            <div class="d-block p-0">
+                <%= render "items/item_rating" %>
+            </div>
+        </div>
+    </div>
+
+    <!-- side menu -->
+    <div class="col-md-4">
+        <div class="card w-100 shadow-sm">
+            <div class="card-header">
+                <i class="far fa-calendar-alt"></i> &nbsp; &nbsp; Schedule
+            </div>
+            <div class="card-body">
+                <% if @unavailable_times.length > 0%>
+                    <div class="alert alert-danger">
+                        <b>Item has been booked:</b>
+                        <ul>
+                            <% @unavailable_times.each do |time| %>
+                                <li class="card-text">
+                                    from <u><%= time.start_date%></u> to <u><%= time.end_date%></u>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <%if user_signed_in? && @item.user_id != current_user.id %>
+                    <form action="/marketplaces/" method="POST">
+                        <h4 class="text-center">Borrow Period</h4>
+                        <label for="datetimepicker1">From: </label>
+                        <div class="input-group date mb-3" id="datetimepicker1" data-target-input="nearest">
+                            <input name="start" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        <label for="datetimepicker1 mb-2">To: </label>
+                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                            <input name="end" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
+                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        <input name="itemid" type="hidden" value="<%= @item.id%>" />
+                        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token%>" />
+                        <div class="d-block text-center mt-3">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </form>
+                <% end %>
+
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker({
+                            format: 'YYYY/MM/DD, HH:mm:ss'
+                        });
+                    });
+                    $(function () {
+                        $('#datetimepicker2').datetimepicker({
+                            format: 'YYYY/MM/DD, HH:mm:ss'
+                        });
+                    });
+                </script>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

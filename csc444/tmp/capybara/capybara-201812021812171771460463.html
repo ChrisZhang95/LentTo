@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lender</title>
+    
+    
+
+    <link rel="stylesheet" media="all" href="/assets/application-d3391284edade59d13189efff5622d288ebddb4b304b451fd405566ad312dfbc.css" data-turbolinks-track="reload" />
+    
+    <script src="/assets/application-324ea87c77c963e6ad02a351d4a99c2ea941ca53cbf60b796212b16c900ec800.js" data-turbolinks-track="reload"></script>
+    <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+  </script>
+<![endif]-->
+  </head>
+
+  <body class="bg-light">
+    <div class="container-fluid p-0">
+</div>
+    <header>
+<nav class="navbar navbar-default navbar-expand-xl navbar-light">
+	<div class="navbar-header d-flex col">
+		<a class="navbar-brand" href="/"><i class="fas fa-cube"></i>Lend<b>To</b></a>  		
+		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+			<span class="navbar-toggler-icon"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+		<ul class="nav navbar-nav">
+			<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+			<li class="nav-item"><a href="#" class="nav-link">About</a></li>
+			<li class="nav-item"><a href="/marketplaces" class="nav-link">Borrow</a></li>
+			<li class="nav-item"><a href="/transactions" class="nav-link">Transaction</a></li>
+			<li class="nav-item"><a href="/items/meetup" class="nav-link">Meet up</a></li>
+			<li class="nav-item"><a href="/friends" class="nav-link">Friendslist</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/users/sign_in">
+					<i class="fas fa-sign-in-alt"></i> Sign In
+</a>      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/sign_up">
+					<i class="fas fa-user-plus"></i> Sign Up
+</a>      </li>
+
+		</ul>
+	</div>
+</nav>
+
+    <main role="main" class="container" id="main_container">
+      <!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link rel="stylesheet" media="screen" href="/assets/landings-a46f3014cd9cda38ba7407a4618d690e5c28d15b65156750076932f20539a26b.css" />
+        <script src="/assets/parallax.min-af869064139f3fb91a19d73004a1828cde4aa37011e863b8f2b048e5a7141bd0.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    </head>
+
+    <script>
+        // JQuery code to handle the title fading when you scroll below a certain point
+        // Fade out occurs when window is scroll down by 25% of it height.
+        $(window).scroll(function(){
+
+            var scroll_px = $(window).height() * 0.25;
+
+            if($(window).scrollTop() > scroll_px)
+            {
+                $("#fading_title").fadeOut("fast");
+                $("#fading_subtitle").fadeOut("fast");
+            }
+            else
+            {
+                $("#fading_title").fadeIn("fast");
+                $("#fading_subtitle").fadeIn("fast");
+            }
+        });
+    </script>
+    
+    <body>
+        <!----------- Landing Page/Splash Page Section ------------->
+        <section>
+            <div class="parallax-window" data-parallax="scroll" data-image-src="./assets/SplashBackdrop1920x1080.png">
+            <div class="landing_background">
+                <div id="landing_Wrapper">
+                    <div id="fading_title" class="display-1 title">
+                        Welcome to LendTo
+                    </div>
+                    <div id="fading_subtitle" class="h2 title">
+                        Lend and borrow a multitude of items. All with a simple touch.
+                        <br><br>
+                        <a class="btn btn-primary btn-lg button_large" href="/">Go to LendTo</a>
+                    </div>  
+                </div>
+            </div>
+        </section>
+
+        <!----------------- Info Block Section ------------------------>
+        <section>
+            <div class="info_block_1">
+                <div class="row">
+                    <div class="col-sm info_block_1_image" ></div>
+                    <div class="col-sm info_block_text">
+                        <div id="info_block_1_wrapper">
+                            <div class="h1 info_title"> 
+                                Borrow and lend like never before.
+                            </div>
+                            <div class="h4 info_description">
+                                Lender brings an intuitive and simple interface that helps you lend and borrow with ease.
+                                Quickly search or post an item from the Marketplace in just a few clicks.
+                                Its hassle-free and time-saving, letting you focus on what truly matters.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info_block_2">
+                <div class="row">
+                    <div class="col-sm info_block_text">
+                        <div id="info_block_1_wrapper">
+                            <div class="h1 info_title"> 
+                                Find what you need, fast.
+                            </div>
+                            <div class="h4 info_description">
+                                Browse the Marketplace to find the right item you need. 
+                                Choose from thousands of items to borrow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 info_block_2_image" ></div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </section>
+
+
+
+
+
+
+
+
+    </body>
+</html>
+    </main>
+
+    <footer class="footer">
+    <div class="container">
+        <ul class="nav">
+            <li class="nav-item mr-5">
+                <small>
+                    &copy; 2018 <b>Lender</b> All Rights Reserved
+                </small>
+            </li>
+            <li class="nav-item px-3 ml-auto"><small><a href="#">About</a></small></li>
+            <li class="nav-item px-3"><small><a href="#">Contact</a></small></li>
+            <li class="nav-item px-3"><small><a href="">News</a></small></li>
+        </ul>
+    </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<h5 class="card-title text-center">Sign in</h5>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-signin') do |f| %>
+  <div class="form-label-group">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg', placeholder: 'email' %>
+    <%= f.label :email %>
+  </div>
+
+  <div class="form-label-group">
+    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control form-control-lg', placeholder: 'password' %>
+    <%= f.label :password %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="custom-control custom-checkbox mb-3 ml-2">
+      <%= f.check_box :remember_me, class: 'custom-control-input' %>
+      <%= f.label :remember_me, class: 'custom-control-label' %>
+    </div>
+  <% end %>
+
+  <button class="btn btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+  <%= link_to 'Sign up', new_user_registration_path, class: "d-block text-center mt-2 small" %>
+  <!--confirmation instructions not received -->
+  <hr class="my-4">
+  <a class="btn  btn-google btn-block text-uppercase" href="<%= user_google_oauth2_omniauth_authorize_path %>">
+    <i class="fab fa-google mr-2"></i> 
+    Sign up with Google
+  </a>
+  <a class="btn  btn-facebook btn-block text-uppercase" href="<%= user_facebook_omniauth_authorize_path %>">
+    <i class="fab fa-facebook-square mr-2"></i>
+    Sign up with Facebook
+  </a>
+<% end %>

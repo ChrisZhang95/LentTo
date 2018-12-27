@@ -1,0 +1,243 @@
+<%= form_with(model: @item, local: true) do |form| %>
+
+  <% if @item.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <div class="d-block">
+        <strong class="pull-left">Error!</strong>
+        <button type="button" class="close pull-right" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div><br>
+      <ul>
+        <% @item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= form.label :category %><br>
+  <%= form.select :category_id, Category.all.collect{|c| [c.name, c.id] },{}, {class: "custom-select"} %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %><br>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= form.label :public %><br>
+  <%= form.select :public, options_for_select([['True', 1], ['False', 0]]), {}, {class: "custom-select"} %>
+  </div>
+
+  <div class="form-group">
+    <div class="custom-file">
+      <%= form.file_field :images, multiple: true, class: "custom-file-input", id: "item_imgs"%>
+      <%= form.label :image, "Select Images", class:"custom-file-label" %>
+    </div>
+  </div>
+
+    <div class="card-columns">
+      <% @item.images.each do |image| %>
+        <div class="card text-white bg-light " style="max-width: 120px;">
+          <%= image_tag(image, class: "card-img-top image-fluid") rescue nil%>
+          <div class="card-body text-center p-1">
+            <%= link_to delete_image_attachment_item_url(image), method: :delete,
+                                  data: {confirm: "Are you sure?"},
+                                  class: "btn btn-danger btn-sm" do %>
+                <i class="fas fa-trash"></i>
+            <% end rescue nil%>
+          </div>
+        </div>
+      <% end %>
+      <div class="card-columns" id="image_frame">
+      </div>
+    </div>
+
+  <!-- <%= form.label :public %><br>
+  <div class="custom-control custom-radio custom-control-inline">
+    <%= form.radio_button :public, true, class:"custom-control-input", :checked => true %>
+    <%= form.label :public_true, 'Yes',  class:"custom-control-label" %>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <%= form.radio_button :public, false, class:"custom-control-input" %>
+    <%= form.label :public_false, 'No',  class:"custom-control-label" %>
+  </div> -->
+
+
+
+  <% if current_user.profile.location && current_user.profile.address%>
+    <div class="form-group" style="padding-top:10px;">
+        <label for="my_addr">Use My Address</label>
+        <input type="checkbox" id="my_addr" name="my_addr" onclick="user_address()"/>
+    </div>
+  <% end %>
+
+  <div class="form-group mt-4">
+    <%= form.label "Please Select Pickup Location", :id => "Pickup_tag", :class => "mb-0" %>
+    <br>
+    <input id="pac-input" class="controls form-control w-60" type="text" placeholder="Search Box">
+    <div class="map_box w-100 mx-auto mt-2" id="map"></div>
+    <script>
+      var original_location = "";
+      var original_address = "";
+      function user_address(){
+        if (document.getElementById('my_addr').checked)
+        {
+            document.getElementById('map').style = "display:none;";
+            document.getElementById('Pickup_tag').style = "display:none;";
+            original_location = document.getElementById("location").value;
+            original_address = document.getElementById("address").value;
+
+            document.getElementById("location").value = JSON.stringify(<%= raw(current_user.profile.location) %>);
+            document.getElementById("address").value = "<%= raw(current_user.profile.address) %>";
+            console.log(document.getElementById("location").value)
+            console.log(document.getElementById("address").value)
+        } else {
+            document.getElementById('map').style = "position: relative; overflow: hidden; display:block;";
+            document.getElementById('Pickup_tag').style = "position: relative; overflow: hidden; display:block;";
+            document.getElementById("location").value = original_location;
+            document.getElementById("address").value = original_address;
+            console.log(document.getElementById("location").value)
+            console.log(document.getElementById("address").value)
+        }
+      }
+      function initAutocomplete() {
+        let default_center = {lat: 43.653908, lng: -79.384293};
+        if(document.getElementById('location').value){
+            default_center = JSON.parse(document.getElementById('location').value);
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: default_center,
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+
+        if(document.getElementById('location').value){
+          markers.push(new google.maps.Marker({
+              map: map,
+              position: default_center,
+              title: "Current Location"
+            }));
+        }
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            let location_coord = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+            let locationString = JSON.stringify(location_coord);
+            document.getElementById("location").value = locationString;
+            document.getElementById("address").value = place.formatted_address;
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBO6_x2QkUcC7K6E7cFiFhEv0eBdOWgWg&libraries=places&callback=initAutocomplete" async defer>
+    </script>
+  </div>
+
+  <%= form.hidden_field :location, {:class => "form-control", :id => "location"} %>
+  <%= form.hidden_field :address, {:class => "form-control", :id => "address"} %>
+
+  <div class=" mt-2 text-center">
+    <%= link_to 'Back', items_path, class:"btn btn-danger px-3" %>
+    <%= form.submit class:"btn btn-primary"%>
+  </div>
+
+  <script type="text/javascript">
+$(document).ready(function() {
+    $('#image_frame').on('click', '.delImg', function(){
+
+        // remove from UI
+        $('#image_frame').empty();
+
+        // reset the actual file
+        var $el = $('#item_imgs');
+        $el.wrap('<form>').closest('form').get(0).reset();
+        $el.unwrap();
+    });
+    $("#item_imgs").change(function(){
+        $('#image_frame').empty();
+        var imgs = $(this)[0].files;
+        var imgCount = $(this)[0].files.length;
+
+        if(imgCount > 0)
+          $('#image_frame').append($('<button class="delImg">Revert images</button>'));
+        for (i = 0; i < imgCount; i++) {
+            var reader = new FileReader()
+            reader.onload = function (e) {
+              $('#image_frame').append(
+                $('<div class="card text-white bg-light " style="max-width: 120px;"> <img style="max-width: 120px;" src=' + e.target.result + '> </div>')
+              );
+            }
+            reader.readAsDataURL(imgs[i]);
+        }
+    });
+});
+
+
+  </script>
+
+<% end %>

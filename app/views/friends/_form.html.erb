@@ -1,0 +1,29 @@
+<% @targets.each do |target| %>
+<%= form_with(model: @friend, local: true) do |form| %>
+  <% if target != current_user %>
+ 	    <ul id="nav-mobile" class="list-group">
+    <li class="list-group-item">
+          <div class="media">
+            <div class="media-left" style="padding-right:20px">
+              <div style="width:100px; height:100px;">
+                  <%= raw(get_picture(target, "media-object rounded w-100"))%>
+                </div>
+            </div>
+            <div class="media-body">
+              <h3><%= target.profile.first_name %>  <%= target.profile.last_name %></h3>
+              <%= form.hidden_field :first_name, :value => target.profile.first_name %>
+              <%= form.hidden_field :last_name, :value => target.profile.last_name  %>
+              <%= form.hidden_field :target_id, :value => target.id  %>
+            </div>
+            <div class="media-right">
+                  <%= form.submit "Add as friend", class: "btn btn-success" %>
+            </div>
+          </div>
+          
+    </li>
+  </ul>
+ <% end %>
+<% end %>
+<% end %>
+
+

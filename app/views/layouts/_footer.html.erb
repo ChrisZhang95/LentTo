@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag 'footer'%>
+
+<footer class="footer">
+    <div class="container bottom_footer_format_copyright">
+        <div class="m-2 p-2 bottom_footer_format">
+            <div class="row">
+                <div class="col bottom_footer_format_social_media">
+                    <table style="height: 100%; width: 100%">
+                        <tbody>    
+                            <tr>
+                                <td class="align-middle-right">Offical Information</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col bottom_footer_format_social_media_link">
+                    <a href="https://www.facebook.com/">
+                        <p>
+                            <i class="fab fa-facebook" style="color:#375b95"></i> 
+                            Facebook 
+                        </p>
+                    </a>
+                    <a href="https://twitter.com/?lang=en">
+                        <p>
+                            <i class="fab fa-twitter-square" style="color:#4baeea"></i>
+                            Twitter
+                        </p>
+                    </a>
+                </div>
+            </div>
+        <div>
+
+        <ul class="nav bottom_footer_format_copyright">
+            <li class="m-1 col bottom_footer_format_left_border"><small><%= link_to "About", landing_path%></small></li>
+            <li class="m-1 col bottom_footer_format_left_border"><small><%= link_to "Terms of Service", "/pages/terms_of_service" %></small></li>
+            <li class="m-1 col bottom_footer_format_left_border"><small><%= link_to "Privacy Policy",  "/pages/privacy_policy" %></small></li>
+            <li class="m-1 col bottom_footer_format_left_border"><small><%= link_to "FAQs", "/pages/frequently_asked_questions" %></small></li>
+            <li class="m-1 col bottom_footer_format_left_border"><small><%= link_to "Contact Us", "/pages/contact_us" %></small></li>
+            <li class="m-1 col bottom_footer_format_left_border"><small><%= link_to "Site Map", "/pages/site_map" %></small></li>
+        </ul>
+        <div class="p-2 bottom_footer_format_copyright" >
+            <small>
+                Copyright &copy; 2018 TeamMVC Inc. All rights reserved. LendTo is a registered trademark of TeamMVC Inc.
+            </small>
+        <div>
+    </div>
+</footer>

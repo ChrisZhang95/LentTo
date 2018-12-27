@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%= stylesheet_link_tag "home" %>
+        <%= stylesheet_link_tag "announcements" %>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    </head>
+    
+    <script>
+
+
+    </script>
+
+    <body>
+    
+        <%= render 'home/newsfeed_carousel' %>
+    
+        <section class="container white shadow p-3 mb-5 bg-white rounded" id="main_body">
+
+            <table class="table borderless">
+                <thead class="thead-dark" >
+                <tr>
+                    <th scope="col"><h6><%= @announcement_details.updated_at %></h6></th>
+                </tr>
+                <tr>
+                    <th scope="col"><h4><b><%= @announcement_details.title %></b></h4></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="img-formatting">
+                                <%= image_tag(@announcement_details.image, class: "img-fluid", width:"500px", "max-height":"200px") rescue nil%>
+                            </div>
+                            <% if user_signed_in? && current_user.admin?%> <!--- NEED TO ADD ADMIN CHECK HERE --->
+                                <%= link_to "Edit",
+                                    edit_announcement_path(@announcement_details),
+                                    class: "btn btn-warning" %>
+                                <%= link_to "Delete",
+                                    announcement_path(@announcement_details),
+                                    class: "btn btn-danger", 
+                                    method: :delete,
+                                    data: { confirm: 'Warning: This will completely remove the announcement from the database. Do you wish to delete?'}  %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="save-whitespace"><%= @announcement_details.description %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container">
+                <div class="row black-bottom">
+                    <div class="col-sm"> 
+                        <%= link_to "Back", announcements_path, class: 'link-formatting' %>
+                    </div>
+                </div>
+            </div>
+        </section>  
+
+
+</html>

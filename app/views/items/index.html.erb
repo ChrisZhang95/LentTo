@@ -1,0 +1,112 @@
+<%# This sets the active menu item for this page %>
+<% content_for :menu_item, "items" %>
+
+<%# This sets the title for this page %>
+<% content_for :title, "My Items" %>
+
+<%# This adds extra style for this page %>
+<% content_for :extra_style do -%>
+    <%= stylesheet_link_tag 'settings' %>
+<% end -%>
+
+<%# START main page content %>
+<div class="row profile">
+    <div class="col-md-3">
+        <%= render 'layouts/settings_menu' %>
+    </div>
+    <div class="col-md-9">
+        <div class="profile-content">
+          <h1>Your Items</h1>
+          <!-- <input type="file" accept="image/*" capture="camera" /> -->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="record group">
+                  <%= link_to history_index_items_path, class: "btn btn-secondary pull-right border-right my-3" do %>
+                    <i class="fas fa-history"></i> History
+                  <% end %>
+                  <%= link_to borrowed_index_items_path, class: "btn btn-secondary pull-right border-right my-3 border-left my-3" do %>
+                    <i class="fas fa-arrow-circle-down"></i> Borrow
+                  <% end %>
+                  <%= link_to lent_index_items_path, class: "btn btn-secondary pull-right my-3 border-left" do %>
+                    <i class="fas fa-arrow-circle-up"></i> Lend
+                  <% end %>
+                </div>
+                <div class="btn-group" role="group" aria-label="record group">
+                  <%= link_to new_item_path, class: "btn btn-outline-success pull-right my-3" do %>
+                    <i class="fas fa-plus-square"></i> New Item
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="thead-light">
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Category</th>
+                      <th>Description</th>
+                      <th>Public</th>
+                      <th>QR Code</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @items.each do |item| %>
+                      <tr>
+                        <td>
+                          <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                        </td>
+                        <td><%= item.name %></td>
+                        <td><%= item.category.name %></td>
+                        <td>
+                          <%= truncate(item.description, length: 25, separator: ' ') %>
+                        </td>
+                        <td><%= is_public_text(item.public) %></td>
+                        <td class="px-0">
+                          <%= link_to qrcode_item_path(item), class: "mx-2" do %>
+                            <i class="fa fa-code text-success"></i>
+                          <% end %>
+                        </td>
+                        <td class="px-0">
+                          <%= link_to item_path(item), class: "mx-2" do %>
+                            <i class="fas fa-eye text-primary"></i>
+                          <% end %>
+                        </td>
+
+                        <td class="px-0">
+                          <%= link_to edit_item_path(item), class: "mx-2" do %>
+                            <i class="fas fa-edit text-success"></i>
+                          <% end %>
+                        </td>
+
+
+
+                        <td class="px-0">
+                          <%= link_to  item_path(item),
+                                method: :delete,
+                                data: { confirm: 'Are you sure?' }, class: "mx-2" do %>
+                            <i class="fas fa-trash text-danger"></i>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="apple_pagination">
+                <%= will_paginate @items, :container => false %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bryan:
+  first_name: Bryan
+  last_name: Fosu
+  picture: 
+  user: bryan
+
+ben:
+  first_name: Ben
+  last_name: Franklin
+  picture: 
+  user: ben
+
+stacy:
+  first_name: Stacy
+  last_name: Asante
+  picture: 
+  user: stacy
+
+eve:
+  first_name: Eve
+  last_name: Adams
+  picture: 
+  user: eve

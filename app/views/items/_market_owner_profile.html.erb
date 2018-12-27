@@ -1,0 +1,45 @@
+<div class="card w-100 p-0 rounded-0 my-3 shadow-sm">
+    <div class="card-body p-0">
+        <div class="row mx-0">
+            <div class="col-md-2 p-0">
+                <%= raw(get_picture(@item.user, "img-fluid w-100")) %>
+            </div>
+            <div class="col-md-10">
+                <h4 class="mb-3">
+                    <%= @item.user.profile.name %>
+                    <small class="muted">
+                        (<%= job_text(@item.user.profile.occupation) %>)
+                    </small>
+                </h4>
+                <p>
+                    Social:
+                    <a href="<%= link_help(@item.user.profile.linkedin) %>" class="btn btn-info btn-sm">
+                        <i class='fab fa-linkedin'></i>
+                    </a>
+                    <a href="<%= link_help(@item.user.profile.facebook) %>" class="btn btn-primary btn-sm">
+                        <i class='fab fa-facebook-square'></i>
+                    </a>
+                </p>
+                <p>
+                    Rating:
+                    <b><%= @item.user.average_rating %></b>
+                    / 5
+                    <i class="fas fa-star-half-alt text-gold"></i>
+                </p>
+                <p>
+                  <button class="btn btn-warning" id="contact">Reveal Contact</button>
+                  <button class="btn btn-warning" id="email" style="text-align: left;"><strong>Email:</strong> <%= @item.user.email %><br> <strong>Phone number:</strong> <%= @item.user.profile.phone %></button>
+
+
+                  <script type="text/javascript">
+                      $('#email').hide();
+                      $('#contact').on('click', function(){
+                        $(this).hide();
+                        $('#email').show();
+                      });
+                  </script>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <%= stylesheet_link_tag "landings" %>
+        <%= javascript_include_tag "parallax.min" %>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    </head>
+
+    <script>
+        // JQuery code to handle the title fading when you scroll below a certain point
+        // Fade out occurs when window is scroll down by 25% of it height.
+        $(window).scroll(function(){
+
+            var scroll_px = $(window).height() * 0.25;
+
+            if($(window).scrollTop() > scroll_px)
+            {
+                $("#fading_title").fadeOut("fast");
+                $("#fading_subtitle").fadeOut("fast");
+            }
+            else
+            {
+                $("#fading_title").fadeIn("fast");
+                $("#fading_subtitle").fadeIn("fast");
+            }
+        });
+    </script>
+    
+    <body>
+        <!----------- Landing Page/Splash Page Section ------------->
+        <section>
+            <div class="parallax-window" data-parallax="scroll" data-image-src="./assets/SplashBackdrop1920x1080.png">
+            <div class="landing_background">
+                <div id="landing_Wrapper">
+                    <div id="fading_title" class="display-1 title">
+                        Welcome to LendTo
+                    </div>
+                    <div id="fading_subtitle" class="h2 title">
+                        Lend and borrow a multitude of items. All with a simple touch.
+                        <br><br>
+                        <%= link_to "Go to LendTo", 
+                        root_path, 
+                        class: "btn btn-primary btn-lg button_large" %>
+                    </div>  
+                </div>
+            </div>
+        </section>
+
+        <!----------------- Info Block Section ------------------------>
+        <section>
+            <div class="info_block_1">
+                <div class="row">
+                    <div class="col-sm info_block_1_image" ></div>
+                    <div class="col-sm info_block_text">
+                        <div id="info_block_1_wrapper">
+                            <div class="h1 info_title"> 
+                                Borrow and lend like never before.
+                            </div>
+                            <div class="h4 info_description">
+                                Lender brings an intuitive and simple interface that helps you lend and borrow with ease.
+                                Quickly search or post an item from the Marketplace in just a few clicks.
+                                Its hassle-free and time-saving, letting you focus on what truly matters.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info_block_2">
+                <div class="row">
+                    <div class="col-sm info_block_text">
+                        <div id="info_block_1_wrapper">
+                            <div class="h1 info_title"> 
+                                Find what you need, fast.
+                            </div>
+                            <div class="h4 info_description">
+                                Browse the Marketplace to find the right item you need. 
+                                Choose from thousands of items to borrow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 info_block_2_image" ></div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </section>
+
+
+
+
+
+
+
+
+    </body>
+</html>

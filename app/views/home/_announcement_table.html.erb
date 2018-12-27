@@ -1,0 +1,36 @@
+<table class="table-hover table_formatting">
+    <thead>
+        <th style="width: 5%"></th>
+        <th style="width: 10%"></th>
+        <th style="width: 75%"></th>
+        <th style="width: 10%;"></th>
+        <th></th>
+            <!--date-->
+        </tr>
+    </thead>
+    <tbody>
+        <% if announcement_data.any? %>
+            <% announcement_data.each do |announcement| %>
+                <tr class="clickable" data-link="<%= announcement_path(announcement)%>">
+                    <%= render 'home/announcement', :announcement => announcement %>
+                </tr>
+            <% end %>
+        <% else %>
+        <tr>
+            <td class="text-center h4" colspan="8">No announcements made.</td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
+<script>
+
+    $("tr[data-link]").click(function() {
+        window.location = $(this).data("link")
+    });
+
+    $('.clickable').css('cursor', 'pointer');
+    
+</script>
+

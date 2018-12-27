@@ -1,0 +1,95 @@
+<ul class="nav nav-tabs nav-fill" id="borrowTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="youborrow-tab" data-toggle="tab" href="#youborrow" role="tab" aria-controls="youborrow" aria-selected="true">
+        Borrow
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " id="yourequest-tab" data-toggle="tab" href="#yourequest" role="tab" aria-controls="yourequest" aria-selected="false">
+        Lend
+    </a>
+  </li>
+</ul>
+
+
+
+
+
+
+
+<div class="tab-content" id="borrowTabContent">
+    <div class="tab-pane fade show active" id="youborrow" role="tabpanel" aria-labelledby="youborrow-tab">
+        <% if @borrowed_trans.size > 0 %>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <th></th>
+                        <th>Item</th>
+                        <th>Borrowed from</th>
+                        <th>Returned date</th>
+                    </thead>
+                    <tbody>
+                        <% @borrowed_trans.each do |transaction| %>
+                            <% item = transaction.item %>
+                            <tr>
+                                <td>
+                                    <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                                </td>
+                                <td><%= item.name %></td>
+                                <td><%= item.user.profile.name %></td>
+                                <td><%= transaction.end_date.to_date %></td>
+                                <td>
+                                  <th><%= link_to 'Rate Lender', new_lender_rating_transaction_uratings_path(transaction), class: "btn btn-warning"%> </th>
+                                </td>
+                                <td>
+                                  <th><%= link_to 'Rate Item', new_item_rating_path(item), class: "btn btn-warning"%> </th>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="apple_pagination">
+                <%= will_paginate @borrowed_trans, :container => false %>
+            </div>
+        <% else %>
+            <h6 class="text-center mt-5">No Records </h6>
+        <% end %>
+
+    </div>
+    <div class="tab-pane fade" id="yourequest" role="tabpanel" aria-labelledby="yourequest-tab">
+        <% if @lent_trans.size > 0 %>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <th></th>
+                        <th>Item</th>
+                        <th>Lent to</th>
+                        <th>Returned date</th>
+                    </thead>
+                    <tbody>
+                        <% @lent_trans.each do |transaction| %>
+                        <% item = transaction.item %>
+                        <tr>
+                            <td>
+                                <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                            </td>
+                            <td><%= item.name %></td>
+                            <td><%= transaction.user.profile.name %></td>
+                            <td><%= transaction.end_date.to_date %></td>
+                            <td>
+                              <th><%= link_to 'Rate Borrower', new_borrower_transaction_uratings_path(transaction) , class: "btn btn-warning"%> </th>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="apple_pagination">
+                <%= will_paginate @lent_trans, :container => false %>
+            </div>
+        <% else %>
+            <h6 class="text-center mt-5">No Records </h6>
+        <% end %>
+    </div>
+</div>

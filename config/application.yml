@@ -1,0 +1,41 @@
+# Add configuration values here, as shown below.
+#
+PUSHER_APP_ID: "662352"
+PUSHER_KEY: "b46e9fafb84efc17e320"
+PUSHER_SECRET: "5815c20c3436f0e356ea"
+PUSHER_CLUSTER: "us2"
+
+# SendGrid Access
+SENDGRID_USERNAME: manuelodoi
+SENDGRID_PASSWORD: lendto@CSC444
+SENDGRID_API_KEY: "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"
+
+# Gmail Access
+GMAIL_USERNAME: lendto.uoft@gmail.com
+GMAIL_PASSWORD: lendto@CSC444
+
+# Google's Authentication
+GOOGLE_CLIENT_ID: 754632773911-d6i922mgi9b57t7i8jpj72e38r7mah6g.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET: GOvkIguuEfRZ1pHi_J29GCAv
+
+# Google Cloud Storage Credentials
+GOOGLE_PROJECT: "Lender"
+GOOGLE_GCS_BUCKET: "lendto_heroku_bucket"
+GOOGLE_GCS_FILE: config/gcs.keyfile
+GOOGLE_GCS_PROJECT_ID: "lender-1543266811205"
+GOOGLE_GCS_PRIVATE_KEY_ID: "c65e743443c0dc81cbe64424a0a04bfa69e156f3"
+GOOGLE_GCS_PRIVATE_KEY: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXuHi39nStg3er\nov1DMxnxlfnDp/KB638b2jBSIu8q8SS8IawFNfDhShpAWJMwzGv4Pn1CBGaTZn/I\nV0FVJFvuYjGO9nfN/twSIUvPtxnkQDIKkkZbxWHpEuEuHK60on6vJMDScurhp8Xp\n8ClTxoFDBJEmN6h3B8Pl91KzIo1HJgKLLTddc1Ax/6H99pBx6zPP/ITGoNp6UCAn\nMEfK2GZl4j6fu3o2AStr7fJauV3twz8eqc/S27OH+YGdeLjY5H7H9zQtGQnj2JbU\nvhB6voBmpKhW1HJTtitX9J2/vzq0N+JZLAR6DBD79FM6DZn52I+aZi2hhIc0OEyi\nNQsFs0x9AgMBAAECggEABuMGhZb6aByxmhrou3e67Q3E7MRkl1W5l93KG6EuYgBT\nVCc+CueLMmIPfvzk7BKmosT58jzaOnvz+eUhOpLf1XcwjlgbgInRpEmIVlAJ5VHQ\nVyqO0Pi29L4rzrFPOYiTg0to1X8iNQSKarrGUvycHVPcv2vY9r3aePHBo+LnQD1t\nJl5iWkmmaHgEw4yoaWoV3+UxOYiKrMRKLZR/lo+lSBPgSeuV2f/A0zmZOW/84+RI\ngIdeAP7UND8H8IxxA+NMYNneXdKX5da23aLzd8n+kmsGGEJXTndTbfVoDniufxco\nqJo9kVBLRAVtTiCQdwzdd8820ee2hL6PaM5zVL+4qQKBgQDxH/38cH7hGmX9g9/n\nT0q/oqnsvQXVHPT1QoDqSTMq+pnZhK9RO6DuzWTxt71bDD2HNUD4jMiuDqPqCL3i\nr4mU9ALpyc0IbkHJ3Er2o/KKtaDpJzd1lTmuqwRpuEM5YlY6tA+ozuS2R0YZ3xsE\n8SWK+CoCER90Ar/88Io6IxF7VQKBgQDlB0bBtey7bZB/m9Z9UqbnQWlWZXZpM0UW\nyBfeGHtvo019NESvnu6uWiW3br4uZLKbBzBO7Kb8p7WO0qBHBol3zd4OaO4hpbj5\nZ3L/EydQ07i10lrgUeD8ItFtxAlz9wsiPp5+aUBOKAImsHXEdrAUTfhuHH0gmLLP\nNKLgZm8ciQKBgQCI4bR5nhMpDqdfZ4Gv+h9g8qKsNhIdjTayFHLCjZNyjpjQFra/\n0q3lYswvPDNOgIBdRSoA70rtJHqA3T2OdkAQQwV0Wo7+fjjysxALO77wZ3NVaGHf\najs4oPT8XxIqfVyeLqHFHs5Pe96byT+5anv5jC+sxLOqU/VRTevqXQYLkQKBgCwB\nKecuPT4F3y2lk6CgsNDeEI85D3dHEo8+Atf5fD4G8myMDmZv8wws5fJIpOHlFywS\nRYXkknEZCBlY/tKmvuL1+yRppNdyMAg7iCzaUUOGaocE09El6kSHrBWbBPXzEYCS\n54ECWAisRz2HyhjldQ9xq7n8X05UCIcnZeQXymGBAoGAc6GGrD7elxrNRcpGM/+W\nbp6iZ0yPpgfD53JS8L4izFb8c7BxG1DSpNCY+5gaimA+CDAY9KOEbQVDVftzVv2U\nxXzQEeBLlHgC3Wxv2hQum+fTFlgLw42nDvzM3siC266nUbbutFOZ0fyEU5t7c75a\nb/BcA4twKJBMm+zUssKZos4=\n-----END PRIVATE KEY-----\n"
+GOOGLE_GCS_CLIENT_EMAIL: "lender-new-gc@lender-1543266811205.iam.gserviceaccount.com"
+GOOGLE_GCS_CLIENT_ID: "114440347635705296596"
+GOOGLE_GCS_CERT_URL: "https://www.googleapis.com/robot/v1/metadata/x509/lender-new-gc%40lender-1543266811205.iam.gserviceaccount.com"
+
+# Facebook Settings
+FACEBOOK_APP_ID: "1994905963943262"
+FACEBOOK_APP_SECRET: e6fd46c290ad8ef7b670774f6fc9d3d8
+
+# SSL Location for Omniauth's callback
+SSL_LOCATION: C:/RailsInstaller/cacert.pem
+
+production:
+  # SSL Location for Omniauth's callback
+  SSL_LOCATION: /usr/lib/ssl/certs/ca-certificates.crt

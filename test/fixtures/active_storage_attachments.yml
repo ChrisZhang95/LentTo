@@ -1,0 +1,135 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bmxbike_1:
+  name: images
+  record_type: Item
+  record_id: 4
+  blob_id: 1
+  created_at: <%= Time.zone.now %>
+
+projector_2:
+  name: images
+  record_type: Item
+  record_id: 1
+  blob_id: 2
+  created_at: <%= Time.zone.now %>
+
+projector_1:
+  name: images
+  record_type: Item
+  record_id: 1
+  blob_id: 3
+  created_at: <%= Time.zone.now %>
+
+bgames_1:
+  name: images
+  record_type: Item
+  record_id: 7
+  blob_id: 4
+  created_at: <%= Time.zone.now %>
+
+bgames_2:
+  name: images
+  record_type: Item
+  record_id: 7
+  blob_id: 5
+  created_at: <%= Time.zone.now %>
+
+bgames_3:
+  name: images
+  record_type: Item
+  record_id: 7
+  blob_id: 6
+  created_at: <%= Time.zone.now %>
+
+fortnite_1:
+  name: images
+  record_type: Item
+  record_id: 8
+  blob_id: 7
+  created_at: <%= Time.zone.now %>
+
+fifa_1:
+  name: images
+  record_type: Item
+  record_id: 11
+  blob_id: 8
+  created_at: <%= Time.zone.now %>
+
+mower_1:
+  name: images
+  record_type: Item
+  record_id: 14
+  blob_id: 9
+  created_at: <%= Time.zone.now %>
+
+minecraft_1:
+  name: images
+  record_type: Item
+  record_id: 9
+  blob_id: 10
+  created_at: <%= Time.zone.now %>
+
+volley_1:
+  name: images
+  record_type: Item
+  record_id: 12
+  blob_id: 11
+  created_at: <%= Time.zone.now %>
+
+volley_2:
+  name: images
+  record_type: Item
+  record_id: 12
+  blob_id: 12
+  created_at: <%= Time.zone.now %>
+
+blower_1:
+  name: images
+  record_type: Item
+  record_id: 16
+  blob_id: 13
+  created_at: <%= Time.zone.now %>
+
+camera_1:
+  name: images
+  record_type: Item
+  record_id: 6
+  blob_id: 14
+  created_at: <%= Time.zone.now %>
+
+camera_2:
+  name: images
+  record_type: Item
+  record_id: 6
+  blob_id: 15
+  created_at: <%= Time.zone.now %>
+
+soccer_1:
+  name: images
+  record_type: Item
+  record_id: 13
+  blob_id: 16
+  created_at: <%= Time.zone.now %>
+
+speaker_1:
+  name: images
+  record_type: Item
+  record_id: 3
+  blob_id: 17
+  created_at: <%= Time.zone.now %>
+
+mic_1:
+  name: images
+  record_type: Item
+  record_id: 2
+  blob_id: 18
+  created_at: <%= Time.zone.now %>
+
+mic_2:
+  name: images
+  record_type: Item
+  record_id: 2
+  blob_id: 19
+  created_at: <%= Time.zone.now %>
+

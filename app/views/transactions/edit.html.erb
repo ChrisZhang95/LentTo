@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  </head>
+  <body>
+    <section>
+      <h1 class="display-1 text-center">This is a Debug Screen</h1>
+    </section>
+
+    <section>
+      <h1 class="text-center">Edit Transaction Information</h1>
+      <h5 class="text-center bold">Your User ID is: <%=@user_id%></h1>
+
+      <%= form_with(model: @transaction, local: true) do |form| %>
+        <% if @transaction.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@transaction.errors.count, "error") %> prohibited
+              this transaction from being saved:
+            </h2>
+            <ul>
+              <% @transaction.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+      <form>
+        <div class="form-group">
+          <label class="h5 bold" for="item_id">Item ID</label>
+          <%= form.text_field :item_id, class: 'form-control', id: "item_id" , value: @transaction.item_id %>
+          <small id="item_help" class="form-text text-muted">Note that this is disjoint from item db. You have to manually check if the item exists in the db.</small>
+        </div>
+
+        <div class="form-group">
+          <label class="h5 bold" for="start_date">Start Date</label>
+          <%= form.text_field :start_date,  class: 'form-control', id: "start_date" , value: @transaction.start_date %>
+          <small id="start_date" class="form-text text-muted">Starting Date of Transaction.</small>
+        </div>
+
+        <div class="form-group">
+          <label class="h5 bold" for="end_date">End Date</label>
+          <%= form.text_field :end_date,  class: 'form-control', id: "end_date" , value: @transaction.end_date %>
+          <small id="end_date" class="form-text text-muted">Ending Date of Transaction.</small>
+        </div>
+
+        <div class="form-group">
+          <label class="h5 bold" for="status">Status</label>
+          <%= form.select :status, options_for_select([1,2,3,4,5,6],selected: @transaction.status), {}, class: 'form-control'  %>
+          <small id="status" class="form-text text-muted">This is an incomplete list of statuses.</small>
+        </div>
+
+        <div class="p-5">
+          <%= form.submit 'Submit', class: "btn btn-success btn-lg btn-block" %>
+        </div>
+
+      </form>
+      <% end %>
+    </section>
+
+    <section>
+       <div class="p-5">
+          <%= link_to "Back", transactions_path, :class => "btn btn-primary btn-lg btn-block" %>
+      </div>
+    </section>
+
+</html>

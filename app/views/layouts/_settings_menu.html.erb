@@ -1,0 +1,62 @@
+<div class="profile-sidebar">
+    <!-- SIDEBAR USERPIC -->
+    <div class="text-center profile-userpic">
+        <%= raw(get_picture(current_user, "img-fluid mx-auto")) %>
+    </div>
+    <!-- END SIDEBAR USERPIC -->
+    <!-- SIDEBAR USER TITLE -->
+    <div class="profile-usertitle">
+        <div class="profile-usertitle-name">
+            <%= logged_user false %>
+        </div>
+        <div class="profile-usertitle-job">
+            <%= job_text(current_user.profile.occupation) %>
+        </div>
+    </div>
+    <!-- END SIDEBAR USER TITLE -->
+    <!-- SIDEBAR BUTTONS -->
+    <div class="profile-userbuttons">
+
+        <b><%= current_user.average_rating %></b>
+        / 5
+        <i class="fas fa-star-half-alt text-gold"></i>
+
+        <a href="<%= link_help(current_user.profile.linkedin) %>" class="btn btn-info btn-sm p-1">
+            <i class='fab fa-linkedin fa-2x'></i>
+        </a>
+        <a href="<%= link_help(current_user.profile.facebook) %>" class="btn btn-primary btn-sm p-1">
+            <i class='fab fa-facebook-square fa-2x'></i>
+        </a>
+    </div>
+    <!-- END SIDEBAR BUTTONS -->
+    <!-- SIDEBAR MENU -->
+    <div class="profile-usermenu">
+        <ul class="nav flex-column">
+            <li class="nav-item <%= settings_menu_active(yield(:menu_item),'profile') %>">
+                <a href="<%= profile_path %>" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </li>
+            <li class="nav-item <%= settings_menu_active(yield(:menu_item),'account') %>">
+                <a href="<%= edit_user_registration_path %>" class="nav-link">
+                    <i class="fas fa-unlock"></i>
+                    Account Settings
+                </a>
+            </li>
+            <li class="nav-item <%= settings_menu_active(yield(:menu_item),'items') %>">
+                <a href="<%= items_path %>" class="nav-link">
+                    <i class="fas fa-list-ul"></i>
+                    Items
+                </a>
+            </li>
+            <li class="nav-item <%= settings_menu_active(yield(:menu_item),'ratings') %>">
+                <a href="<%= urating_path %>"  class="nav-link">
+                    <i class="fas fa-star-half"></i>
+                    Ratings
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END MENU -->
+</div>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>QR Code Scan</title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="../../assets/javascripts/qrcode.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+      <p>Date You Would Like to Lend at:</p>
+      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+          <input name="start" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" id="date1"/>
+          <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+      </div>
+      <p>Completion Date:</p>
+      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+          <input name="end" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" id="date2"/>
+          <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+      </div>
+      <button id='generateButton' style="margin-top:2%;">Generate QR Code</button>
+
+
+  <%= content_tag :div, class: "temp_information", data: {temp: @id} do %>
+  <% end %>
+  <%= content_tag :div, class: "temp_information2", data: {temp: @name} do %>
+  <% end %>
+  <div id="qrcode"></div>
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+        $('#generateButton').click(function(){
+            $("#qrcode").empty();
+            var string = $('.temp_information').data('temp').toString() + ";";
+            string += $('.temp_information2').data('temp').toString();
+            var startdate = format($('#date1').val());
+            var enddate = format($('#date2').val());
+            if(startdate == '' || enddate == '' || typeof startdate === "undefined"|| typeof enddate === "undefined")
+              alert("Please specify both start date and end date.");
+            else{
+              string += ";" + startdate + ";" + enddate;
+              // Encrypt
+              var dt = new Date($.now());
+              key = (dt.getMonth()+1) + ' ' +dt.getDate() + ' ' + dt.getFullYear()
+              var ciphertext = CryptoJS.AES.encrypt(string, key);
+              new QRCode(document.getElementById("qrcode"), ciphertext.toString());
+            }
+        });
+  });
+
+  function format(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        // Months use 0 index.
+        return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+    }
+  }
+  </script>
+</body>
+
+</html>

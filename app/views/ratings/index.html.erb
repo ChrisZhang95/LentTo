@@ -1,0 +1,39 @@
+<div class="card text-center mt-4" style="width: 100%">
+  <div class="card-header">
+      <h3><strong>User Comments</strong></h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= image_tag(@item.images[0], class:"rounded", style:'width:150px') rescue nil%>
+      <br>
+      <%= @item.name %>
+    </h5>
+    <p class="card-text">Average score for this item: <strong><%= @average %></strong></p>
+    <%= link_to 'Add a rating now', new_item_rating_path, {class: "btn btn-success"} %>
+    <%= link_to 'Back', marketplaces_path, class: "btn btn-warning" %>
+  </div>
+</div>
+  
+  <% @item.ratings.each do |rating| %>
+    <div class="card" style="width:100%">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= rating.user.profile.first_name %> <%= rating.user.profile.last_name %>
+          <% rating.score.times do%>
+            <span class="fas fa-star" style="color:#FFBC15"></span>
+          <% end %>
+          <% (5-rating.score).times do%>
+            <span class="far fa-star" style="color:#FFBC15"></span>
+          <% end %>
+        </h5>
+        <p class="card-text"><%= rating.comment %></p>
+        <% if current_user.id == rating.user_id %>
+          <%= link_to 'Edit Comment', edit_item_rating_path(rating.item,rating), :class => "btn btn-primary" %>
+          <%= link_to 'Delete Rating', [rating.item, rating], class: "btn btn-danger",
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+			  

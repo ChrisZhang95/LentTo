@@ -1,0 +1,23 @@
+<%# This sets the active menu item for this page %>
+<% content_for :menu_item, "account" %>
+
+<%# This sets the title for this page %>
+<% content_for :title, "Account Seetings" %>
+
+<%# This adds extra style for this page %>
+<% content_for :extra_style do -%>
+    <%= stylesheet_link_tag 'settings' %>
+<% end -%>
+
+<%# START main page content %>
+<div class="row profile">
+    <div class="col-md-3">
+        <%= render 'layouts/settings_menu' %>
+    </div>
+    <div class="col-md-9">
+        <div class="profile-content">   
+            <h1>Edit Account</h1>
+            <%= render 'edit_form' %>
+        </div>
+    </div>
+</div>

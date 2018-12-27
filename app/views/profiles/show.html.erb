@@ -1,0 +1,176 @@
+<%# This sets the active menu item for this page %>
+<% content_for :menu_item, "profile" %>
+
+<%# This sets the title for this page %>
+<% content_for :title, "User Profile" %>
+
+<%# This adds extra style for this page %>
+<% content_for :extra_style do -%>
+    <%= stylesheet_link_tag 'settings' %>
+<% end -%>
+<%# START main page content %>
+<div class="row profile">
+    <div class="col-md-3">
+        <%= render 'layouts/settings_menu' %>
+    </div>
+    <div class="col-md-9">
+        <div class="profile-content">
+            <h2>Profile</h2>
+
+            <%= form_for current_user, url: profile_path do |f| %>
+                <%= f.fields_for :profile do |p| %>
+
+                    <%= p.hidden_field :picture %>
+
+                    <div class="form-group">
+                        <%= p.label :first_name %>
+                        <%= p.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                        <%= p.label :last_name %>
+                        <%= p.text_field :last_name, autofocus: true, autocomplete: "last_name", class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                        <%= p.label :phone_number %>
+                        <%= p.text_field :phone, autofocus: true, autocomplete: "phone", class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                        <%= p.label :occupation %>
+                        <%= p.text_field :occupation, autofocus: true, autocomplete: "occupation", class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                        <%= p.label :facebook %>
+                        <%= p.text_field :facebook, autofocus: true, autocomplete: "Facebook Link", class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                        <%= p.label :linkedin %>
+                        <%= p.text_field :linkedin, autofocus: true, autocomplete: "Linkedin Link", class: 'form-control' %>
+                    </div>
+
+                    <br>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <%= p.file_field :avatar, multiple: false, class: "custom-file-input" %>
+                            <%= p.label :avatar, "Profile Picture", class:"custom-file-label" %>
+                        </div>
+                    </div>
+                    <%# Address Starts Here %>
+                    <div class="form-group">
+                        <%= p.label "Please Enter Your Address" %><br>
+                        <input id="pac-input" class="controls form-control w-60" type="text" placeholder="Search Box">
+                        <div class="map_box w-100 mx-auto mt-2" id="map"></div>
+                        <script>
+                            function initAutocomplete() {
+                                let default_center = {lat: 43.653908, lng: -79.384293};
+                                if(document.getElementById('location').value){
+                                    default_center = JSON.parse(document.getElementById('location').value);
+                                }
+
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                center: default_center,
+                                zoom: 13,
+                                mapTypeId: 'roadmap'
+                                });
+
+                                // Create the search box and link it to the UI element.
+                                var input = document.getElementById('pac-input');
+                                var searchBox = new google.maps.places.SearchBox(input);
+                                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                                // Bias the SearchBox results towards current map's viewport.
+                                map.addListener('bounds_changed', function() {
+                                searchBox.setBounds(map.getBounds());
+                                });
+
+                                var markers = [];
+
+                                if(document.getElementById('location').value){
+                                markers.push(new google.maps.Marker({
+                                    map: map,
+                                    position: default_center,
+                                    title: "Current Location"
+                                    }));
+                                }
+                                // Listen for the event fired when the user selects a prediction and retrieve
+                                // more details for that place.
+                                searchBox.addListener('places_changed', function() {
+                                var places = searchBox.getPlaces();
+
+                                if (places.length == 0) {
+                                    return;
+                                }
+
+                                // Clear out the old markers.
+                                markers.forEach(function(marker) {
+                                    marker.setMap(null);
+                                });
+                                markers = [];
+
+                                // For each place, get the icon, name and location.
+                                var bounds = new google.maps.LatLngBounds();
+                                places.forEach(function(place) {
+                                    if (!place.geometry) {
+                                    console.log("Returned place contains no geometry");
+                                    return;
+                                    }
+                                    var icon = {
+                                        url: place.icon,
+                                        size: new google.maps.Size(71, 71),
+                                        origin: new google.maps.Point(0, 0),
+                                        anchor: new google.maps.Point(17, 34),
+                                        scaledSize: new google.maps.Size(25, 25)
+                                    };
+
+                                    // Create a marker for each place.
+                                    markers.push(new google.maps.Marker({
+                                        map: map,
+                                        icon: icon,
+                                        title: place.name,
+                                        position: place.geometry.location
+                                    }));
+                                    let address = '';
+                                    if (place.address_components) {
+                                        address = [
+                                            (place.address_components[0] && place.address_components[0].short_name || ''),
+                                            (place.address_components[1] && place.address_components[1].short_name || ''),
+                                            (place.address_components[2] && place.address_components[2].short_name || ''),
+                                            (place.address_components[3] && place.address_components[3].short_name || '')
+
+                                        ].join(' ');
+                                    }
+
+                                    let location_coord = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+                                    let locationString = JSON.stringify(location_coord);
+                                    document.getElementById("location").value = locationString;
+                                    document.getElementById("address").value = place.formatted_address;
+
+                                    if (place.geometry.viewport) {
+                                    // Only geocodes have viewport.
+                                    bounds.union(place.geometry.viewport);
+                                    } else {
+                                    bounds.extend(place.geometry.location);
+                                    }
+                                });
+                                map.fitBounds(bounds);
+                                });
+                            }
+                        </script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBO6_x2QkUcC7K6E7cFiFhEv0eBdOWgWg&libraries=places&callback=initAutocomplete" async defer>
+                        </script>
+                        <%= p.hidden_field :location, {:class => "form-control", :id => "location"} %>
+                        <%= p.hidden_field :address, {:class => "form-control", :id => "address"} %>
+                    </div>
+
+                <% end %>
+                <div class="form-group">
+                    <%= f.submit "Update", class: 'btn btn-primary' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

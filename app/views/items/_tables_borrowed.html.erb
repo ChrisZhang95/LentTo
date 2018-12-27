@@ -1,0 +1,186 @@
+<ul class="nav nav-tabs nav-fill" id="borrowTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="youborrow-tab" data-toggle="tab" href="#youborrow" role="tab" aria-controls="youborrow" aria-selected="true">
+        Items You Borrowed
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " id="yourequest-tab" data-toggle="tab" href="#yourequest" role="tab" aria-controls="yourequest" aria-selected="false">
+        Items You Requested
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " id="acceptr-tab" data-toggle="tab" href="#acceptr" role="tab" aria-controls="acceptr" aria-selected="false">
+        Accepted Requests
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " id="rejectr-tab" data-toggle="tab" href="#rejectr" role="tab" aria-controls="rejectr" aria-selected="false">
+        Rejected Requests
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content" id="borrowTabContent">
+    <div class="tab-pane fade show active" id="youborrow" role="tabpanel" aria-labelledby="youborrow-tab">
+        <% if @borrowed_trans.size > 0 %>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <th></th>
+                        <th>Item</th>
+                        <th>Borrowed from</th>
+                        <th>Return date</th>
+                        <th>Days left</th>
+                    </thead>
+                    <tbody>
+                        <% @borrowed_trans.each do |transaction| %>
+                            <% item = transaction.item %>
+                            <tr>
+                                <td>
+                                    <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                                </td>
+                                <td><%= item.name %></td>
+                                <td><%= item.user.profile.name %></td>
+                                <td><%= transaction.end_date.to_date %></td>
+                                <td><%= (transaction.end_date.to_date - DateTime.now.to_date).to_i %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="apple_pagination">
+                <%= will_paginate @borrowed_trans, :container => false %>
+            </div>
+        <% else %>
+            <h6 class="text-center mt-5">No Records </h6>
+        <% end %>
+
+    </div>
+    <div class="tab-pane fade" id="yourequest" role="tabpanel" aria-labelledby="yourequest-tab">
+        <% if @borrowing_trans.size > 0 %>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <th></th>
+                        <th>Item</th>
+                        <th>Borrowing from</th>
+                        <th>Start date</th>
+                        <th>Return date</th>
+                    </thead>
+                    <tbody>
+                        <% @borrowing_trans.each do |transaction| %>
+                        <% item = transaction.item %>
+                        <tr>
+                            <td>
+                                <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                            </td>
+                            <td><%= item.name %></td>
+                            <td><%= item.user.profile.name %></td>
+                            <td><%= transaction.start_date.to_date %></td>
+                            <td><%= transaction.end_date.to_date %></td>
+                            <td>
+                                <%= link_to request_cancel_transaction_path(transaction),
+                                        method: :put,
+                                        data: { confirm: 'Are you sure?' }, class: "mx-2"  do %>
+                                    <i class="fas fa-trash text-danger"></i>
+                                <% end %>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="apple_pagination">
+                <%= will_paginate @borrowing_trans, :container => false %>
+            </div>
+        <% else %>
+            <h6 class="text-center mt-5">No Records </h6>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="acceptr" role="tabpanel" aria-labelledby="acceptr-tab">
+        <% if @accepted_trans.size > 0 %>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <th></th>
+                        <th>Item</th>
+                        <th>Borrowing from</th>
+                        <th>Start date</th>
+                        <th>Return date</th>
+                    </thead>
+                    <tbody>
+                        <% @accepted_trans.each do |transaction| %>
+                            <% item = transaction.item %>
+                            <tr>
+                                <td>
+                                    <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                                </td>
+                                <td><%= item.name %></td>
+                                <td><%= item.user.profile.name %></td>
+                                <td><%= transaction.start_date.to_date %></td>
+                                <td><%= transaction.end_date.to_date %></td>
+                                <td class="px-0">
+                                    <%= link_to meetup_success_transaction_path(transaction),
+                                                method: :put,
+                                                data: {
+                                                    confirm: "Are you sure you have received the item?\n\nDo not accept if you haven't received the item yet!!!"
+                                                },
+                                                class: "mx-2"  do %>
+                                        <i class="fas fa-check-circle text-success"></i>
+                                    <% end %>
+                                </td>
+                                <td class="px-0">
+                                    <%= link_to request_cancel_transaction_path(transaction),
+                                            method: :put,
+                                            data: { confirm: 'Are you sure?' }, class: "mx-2"  do %>
+                                        <i class="fas fa-trash text-danger"></i>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="apple_pagination">
+                <%= will_paginate @accepted_trans, :container => false %>
+            </div>
+        <% else %>
+            <h6 class="text-center mt-5">No Records </h6>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="rejectr" role="tabpanel" aria-labelledby="rejectr-tab">
+        <% if @rejected_trans.size > 0 %>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <th></th>
+                        <th>Item</th>
+                        <th>Borrowing from</th>
+                        <th>Start date</th>
+                        <th>Return date</th>
+                    </thead>
+                    <tbody>
+                        <% @rejected_trans.each do |transaction| %>
+                            <% item = transaction.item %>
+                            <tr>
+                                <td>
+                                    <%= image_tag(item.images.first, style:'height:30px', class: "image-fluid rounded") rescue nil%>
+                                </td>
+                                <td><%= item.name %></td>
+                                <td><%= item.user.profile.name %></td>
+                                <td><%= transaction.start_date.to_date %></td>
+                                <td><%= transaction.end_date.to_date %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="apple_pagination">
+                <%= will_paginate @rejected_trans, :container => false %>
+            </div>
+        <% else %>
+            <h6 class="text-center mt-5">No Records </h6>
+        <% end %>
+    </div>
+</div>

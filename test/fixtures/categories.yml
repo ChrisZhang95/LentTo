@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+audiov:
+  name: Audio-Visuals
+
+bikes:
+  name: Bikes
+
+books:
+  name: Books
+
+cameras:
+  name: Cameras
+
+games:
+  name: Games
+
+sports:
+  name: Sports
+
+tools:
+  name: Tools
+

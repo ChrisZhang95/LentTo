@@ -1,0 +1,15 @@
+<div class="container-fluid p-0">
+    <% flash.each do |key, value| %>
+        <% unless key.to_s == 'timedout'%>
+            <% unless key.blank? %>
+                <div class="alert <%= flash_class(key.to_sym) %> alert-dismissible fade show m-0 rounded-0 text-center" role="alert">
+                    <strong><%= raw flash_icon(key.to_sym) %></strong>
+                    <%= value %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>

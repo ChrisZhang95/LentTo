@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%= stylesheet_link_tag "home" %>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <%= javascript_include_tag "jquery.waypoints.min" %>
+        <%= javascript_include_tag "jquery.counterup.min" %>
+    </head>
+    
+    <script>
+
+       $(document).ready(function($) {
+            $('.counter').counterUp({
+                delay: 10,
+                time: 1000
+            });
+        });
+
+    </script>
+
+    <body>
+    
+        <%= render 'newsfeed_carousel' %>
+
+        <section class="container" id="main_body">
+            <div class="row">
+                <div class="col-md-9  white shadow p-3 mb-5 bg-white rounded">
+                    <!-------------------- Tabs -------------------->
+                    <ul class="nav nav-tabs" id="news_tab" role="tablist">
+                        <li class="nav-item tab_formatting">
+                            <a class="nav-link active tab_font" id="latest_tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="true">
+                                Latest<br>
+                                <i class="fas fa-angle-double-up fa-lg center_icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item tab_formatting">
+                            <a class="nav-link tab_font" id="important_tab" data-toggle="tab" href="#important" role="tab" aria-controls="important" aria-selected="false">
+                                Important<br>
+                                <!--i class="fas fa-exclamation-circle fa-lg center_icon" style="color: #e52222;"></i-->
+                                <i class="fas fa-exclamation-circle fa-lg center_icon" ></i>
+                            </a>
+                        </li>
+                        <li class="nav-item tab_formatting">
+                            <a class="nav-link tab_font" id="notices_tab" data-toggle="tab" href="#notices" role="tab" aria-controls="notice" aria-selected="false">
+                                Notices<br>
+                                <i class="far fa-star fa-lg center_icon" ></i>
+                            </a>
+                        </li>
+                        <li class="nav-item tab_formatting">
+                            <a class="nav-link tab_font" id="maintenance_tab" data-toggle="tab" href="#maintenance" role="tab" aria-controls="maintenance" aria-selected="false">
+                                Maintenance<br>
+                                <i class="fas fa-wrench fa-lg center_icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item tab_formatting">
+                            <a class="nav-link tab_font " id="status_tab" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+                                Status<br>
+                                <i class="fas fa-times-circle fa-lg center_icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!--------------------Latest Tabs -------------------->
+                    <div class="tab-content" id="news_tab_content">
+                        <div class="tab-pane fade show active" id="latest" role="tabpanel" aria-labelledby="latest_tab">
+                            <% announcement_data = @announcement%>
+                            <%= render 'announcement_table', :announcement_data => announcement_data %>                  
+                        </div>
+                        <!-------------------- Important Tabs -------------------->
+                        <div class="tab-pane fade" id="important" role="tabpanel" aria-labelledby="important_tab">     
+                            <% announcement_data = @announcement_important%>
+                            <%= render 'announcement_table', :announcement_data => announcement_data %>                  
+                        </div>
+                        <!-------------------- Notices Tabs -------------------->
+                        <div class="tab-pane fade" id="notices" role="tabpanel" aria-labelledby="notice_tab">
+                            <% announcement_data = @announcement_notice%>
+                            <%= render 'announcement_table', :announcement_data => announcement_data %>                  
+                        </div>
+                        <!-------------------- Maintenance Tabs -------------------->
+                        <div class="tab-pane fade" id="maintenance" role="tabpanel" aria-labelledby="maintenance_tab">
+                            <% announcement_data = @announcement_maintenance%>
+                            <%= render 'announcement_table', :announcement_data => announcement_data %>                  
+                        </div>
+                        <!-------------------- Status Tabs -------------------->
+                        <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status_tab">
+                            <% announcement_data = @announcement_status%>
+                            <%= render 'announcement_table', :announcement_data => announcement_data %>                  
+                        </div>
+                    </div>
+
+                    <!-- Notification Cards -->
+                    <% if @announcement.any? %>
+                        <% @announcement.each do |announcement_data| %>
+                            <%= render 'home/announcement_card', :announcement_data => announcement_data %>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="col-md">
+                    <div class="ml-1">
+                        <div class="text-center white-text   white shadow p-3 mb-5 bg-white rounded">
+                            <div class="single_counter p-y-2 m-t-1">
+                                <i class="fas fa-box m-b-1 "  style="color:#e5c02e"></i>
+                                <h2 class="counter"><%= @num_of_items %></h2>
+                                <p><b>Items in Marketplace</b></p>
+                            </div>
+                        </div>
+                        <div class="text-center white-text   white shadow p-3 mb-5 bg-white rounded">
+                            <div class="single_counter p-y-2 m-t-1">
+                                <i class="fas fa-users m-b-1"  style="color:#07e193"></i>
+                                <h2 class="counter"><%= @num_of_users %></h2>
+                                <p><b>Users using LendTo</b></p>
+                            </div>
+                        </div>
+                        <div class="text-center white-text   white shadow p-3 mb-5 bg-white rounded">
+                            <div class="single_counter p-y-2 m-t-1">
+                                <i class="fas fa-sync m-b-1" style="color:#00ae39"></i>
+                                <h2 class="counter"><%= @num_of_transcations %></h2>
+                                <p><b>Transactions Made</b></p>
+                            </div>
+                        </div>
+                        <div class="text-center white-text   white shadow p-3 mb-5 bg-white rounded">
+                            <div class="p-y-2 m-t-1">
+                                <p><b>Find Us On:</b></p>
+                                <a href="https://www.facebook.com/">
+                                    <i class="fab fa-facebook m-b-2" style="color:#375b95"></i>
+                                </a>
+                                <a href="https://twitter.com/?lang=en">
+                                    <i class="fab fa-twitter m-b-2" style="color:#4baeea"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <div>   
+        </section>  
+    
+    </body>
+
+</html>
